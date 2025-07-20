@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ArrowLeft, MapPin, Clock, DollarSign, Users } from 'lucide-react';
+import { ArrowLeft, MapPin, Clock, DollarSign} from 'lucide-react';
 
 interface JoinTeamProps {
   onBack: () => void;
@@ -130,7 +130,7 @@ const JoinTeam: React.FC<JoinTeamProps> = ({ onBack }) => {
 
         {/* Job Listings */}
         <div ref={jobsRef} className="space-y-6">
-          {jobs.map((job, index) => (
+          {jobs.map((job) => (
             <div
               key={job.id}
               className="group bg-gray-50 hover:bg-white rounded-2xl p-8 transition-all duration-300 hover:shadow-lg border border-transparent hover:border-pink-200"

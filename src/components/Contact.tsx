@@ -14,22 +14,14 @@ const Contact: React.FC<ContactProps> = ({ onNavigate }) => {
   const bigLetterRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
-  const shapeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Initial setup
       gsap.set([bigLetterRef.current, titleRef.current, descriptionRef.current], {
         opacity: 0,
         y: 50,
       });
 
-      gsap.set(shapeRef.current, {
-        scale: 0,
-        rotation: 60,
-      });
-
-      // Animation sequence
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -37,13 +29,7 @@ const Contact: React.FC<ContactProps> = ({ onNavigate }) => {
         }
       });
 
-      tl.to(shapeRef.current, {
-        scale: 1,
-        rotation: 0,
-        duration: 1.2,
-        ease: "back.out(1.7)",
-      })
-      .to(bigLetterRef.current, {
+      tl.to(bigLetterRef.current, {
         opacity: 1,
         y: 0,
         duration: 0.8,
@@ -67,56 +53,42 @@ const Contact: React.FC<ContactProps> = ({ onNavigate }) => {
   }, []);
 
   return (
-    <section id="contact" className="min-h-screen relative overflow-hidden bg-gray-50" ref={sectionRef}>
-      {/* Geometric Shapes */}
-      <div className="absolute inset-0">
-        <div 
-          ref={shapeRef}
-          className="absolute top-10 right-0 w-96 h-96 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full transform translate-x-32 -translate-y-16 opacity-80"
-        />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-yellow-400 to-yellow-500 transform -rotate-12 -translate-x-20 translate-y-20 opacity-70 rounded-3xl" />
-        <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-teal-600 transform rotate-12 opacity-20 rounded-2xl" />
-      </div>
-
+    <section id="contact" className="min-h-screen relative overflow-hidden bg-white" ref={sectionRef}>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between min-h-screen py-20">
           <div className="lg:w-1/2 mb-10 lg:mb-0">
             {/* Large Letter */}
             <div className="flex items-start space-x-8">
-              <div 
+              <div
                 ref={bigLetterRef}
                 className="text-9xl lg:text-[12rem] font-bold text-gray-900 leading-none"
               >
-                T
+                
               </div>
-              <div className="flex flex-col justify-center space-y-2 pt-8">
-                <div className="text-gray-400 text-sm tracking-widest">A</div>
-                <div className="text-gray-400 text-sm tracking-widest">L</div>
-                <div className="text-gray-400 text-sm tracking-widest">K</div>
-              </div>
+            
             </div>
           </div>
 
           <div className="lg:w-1/2 lg:pl-16">
             <div className="mb-6">
               <p className="text-sm text-gray-500 mb-2">Get In Touch</p>
-              <h1 
+              <h1
                 ref={titleRef}
                 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
               >
                 Let's Start
                 <span className="block text-teal-600">Something</span>
               </h1>
-              <p 
+              <p
                 ref={descriptionRef}
                 className="text-lg text-gray-600 mb-8 leading-relaxed"
               >
-                Ready to bring your vision to life? Let's discuss 
+                Ready to bring your vision to life? Let's discuss
                 how we can create something amazing together.
               </p>
 
               {/* Animated Arrow */}
-              <div 
+              <div
                 onClick={() => onNavigate('get-in-touch')}
                 className="group cursor-pointer inline-flex items-center space-x-3 text-teal-600 hover:text-teal-700 transition-colors duration-300"
               >
