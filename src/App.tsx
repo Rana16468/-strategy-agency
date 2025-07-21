@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import VerticalMenu from './components/VerticalMenu';
 import Hero from './components/Hero';
 import About from './components/About';

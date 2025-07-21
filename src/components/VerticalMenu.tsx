@@ -12,6 +12,7 @@ const VerticalMenu: React.FC<VerticalMenuProps> = ({
 }) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const lettersRef = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [scrolling, setScrolling] = useState(false);
 
   const sections = [
@@ -43,38 +44,43 @@ const VerticalMenu: React.FC<VerticalMenuProps> = ({
       onSectionChange(sections[nextIndex].id);
     }
 
-    setTimeout(() => setScrolling(false), 400); // smoother delay
+    setTimeout(() => setScrolling(false), 400);
   };
 
   useEffect(() => {
     const letters = lettersRef.current;
+    const container = containerRef.current;
+
+    if (!container) return;
 
     gsap.set(letters, {
       scale: 1,
-      opacity: 0.6,
-      fontWeight: 400,
     });
 
     const activeIndex = sections.findIndex(
       (section) => section.id === activeSection
     );
+
     if (activeIndex !== -1 && letters[activeIndex]) {
+      // Scale up the active letter
       gsap.to(letters[activeIndex], {
-        scale: 1.8,
-        opacity: 1,
-        fontWeight: 700,
-        duration: 0.6,
-        ease: "back.out(1.7)",
+        scale: 2,
+        duration: 0.2,
       });
 
+      // Center the container based on active letter position
+      const centerOffset = (activeIndex - 2) * -80; // 2 is middle index, 80px is spacing
+      gsap.to(container, {
+        y: centerOffset,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+
+      // Scale down other letters
       letters.forEach((letter, index) => {
         if (index !== activeIndex && letter) {
           gsap.to(letter, {
             scale: 1,
-            opacity: 0.6,
-            fontWeight: 400,
-            duration: 0.4,
-            ease: "power2.out",
           });
         }
       });
@@ -98,26 +104,35 @@ const VerticalMenu: React.FC<VerticalMenuProps> = ({
       ref={menuRef}
       className="fixed top-1/2 transform -translate-y-1/2 z-50 hidden lg:block"
     >
-      <div className="flex flex-col space-y-8 relative">
+      <div 
+        ref={containerRef}
+        className="flex flex-col space-y-20 relative"
+      >
         {sections.map((section, index) => (
           <div
             key={section.id}
             ref={(el) => (lettersRef.current[index] = el)}
             onClick={() => handleLetterClick(section.id)}
-            className="cursor-pointer text-6xl font-bold text-neutral-800   "
+            className={`cursor-pointer transition-all duration-300 ease-in-out text-neutral-800
+              ${
+                activeSection === section.id
+                  ? "text-9xl font-extrabold"
+                  : "text-lg font-medium"
+              }
+             `}
             style={{ transformOrigin: "center" }}
           >
             {section.letter}
           </div>
         ))}
 
-        {/* Indicator dot only (border removed) */}
+        {/* Indicator Dot */}
         <div className="absolute -right-8 top-0 bottom-0 flex items-start justify-center pointer-events-none">
           <div
-            className="w-2 h-2  rounded-full transition-all duration-500 ease-out"
+            className="w-2 h-2 rounded-full transition-all duration-500 ease-out"
             style={{
               transform: `translateY(${
-                sections.findIndex((s) => s.id === activeSection) * 50
+                sections.findIndex((s) => s.id === activeSection) * 80
               }px)`,
             }}
           />

@@ -1,15 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface CareerProps {
+interface AboutProps {
   onNavigate: (page: string) => void;
 }
+// { onNavigate }
 
-const Career: React.FC<CareerProps> = ({ onNavigate }) => {
+const Career: React.FC<AboutProps> = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const bigLetterRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -19,10 +19,7 @@ const Career: React.FC<CareerProps> = ({ onNavigate }) => {
     const ctx = gsap.context(() => {
       gsap.set(
         [bigLetterRef.current, titleRef.current, descriptionRef.current],
-        {
-          opacity: 0,
-          y: 50,
-        }
+        { opacity: 0, y: 50 }
       );
 
       const tl = gsap.timeline({
@@ -32,16 +29,12 @@ const Career: React.FC<CareerProps> = ({ onNavigate }) => {
         },
       });
 
-      tl.to(
-        bigLetterRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        },
-        "-=0.6"
-      )
+      tl.to(bigLetterRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      })
         .to(
           titleRef.current,
           {
@@ -70,56 +63,41 @@ const Career: React.FC<CareerProps> = ({ onNavigate }) => {
   return (
     <section
       id="career"
-      className="min-h-screen relative overflow-hidden bg-white"
+      className="min-h-screen bg-white overflow-hidden"
       ref={sectionRef}
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between min-h-screen py-20">
-          <div className="lg:w-1/2 mb-10 lg:mb-0">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-[300px] min-h-screen py-20">
+          <div className="mb-10 lg:mb-0">
             <div className="flex items-start space-x-8">
               <div
                 ref={bigLetterRef}
-                className="text-9xl lg:text-[12rem] font-bold text-gray-900 leading-none"
-              ></div>
+                className="text-6xl sm:text-7xl md:text-9xl lg:text-[12rem] font-bold text-gray-900 leading-none"
+              >
+                {/* Big Letter or Initial */}
+              </div>
             </div>
           </div>
 
-          <div className="lg:w-1/2 lg:pl-16">
+          <div className="lg:pl-16">
             <div className="mb-6">
-              <p className="text-sm text-gray-500 mb-2">Join Us</p>
+              <p className="text-sm text-neutral-800 font-bold mb-2">
+                {" "}
+                Join Us
+              </p>
               <h1
                 ref={titleRef}
-                className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
+                className="text-3xl sm:text-4xl lg:text-6xl font-bold text-neutral-800 mb-6 leading-tight"
               >
-                Build Your
-                <span className="block text-pink-600">Future</span>
+                Build Your Future
               </h1>
               <p
                 ref={descriptionRef}
-                className="text-lg text-gray-600 mb-8 leading-relaxed"
+                className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed mt-10"
               >
                 Join our talented team and work on exciting projects that shape
                 the future of digital experiences.
               </p>
-
-              {/* Animated Arrow */}
-              <div
-                onClick={() => onNavigate("join-team")}
-                className="group cursor-pointer inline-flex items-center space-x-3 text-pink-600 hover:text-pink-700 transition-colors duration-300"
-              >
-                <span className="text-sm font-medium tracking-wide">
-                  JOIN OUR TEAM
-                </span>
-                <div className="relative">
-                  <div className="w-12 h-12 border-2 border-current flex items-center justify-center rounded-full group-hover:bg-pink-600 group-hover:text-white transition-all duration-500 transform group-hover:scale-110">
-                    <ArrowRight
-                      size={20}
-                      className="group-hover:translate-x-1 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="absolute inset-0 rounded-full border border-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { ArrowRight } from "lucide-react";
 import { gsap } from "gsap";
 
 interface HeroProps {
@@ -74,32 +73,33 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
       ref={heroRef}
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
-        <div className="flex flex-col lg:flex-row items-center justify-between min-h-screen py-20">
-          <div className="lg:w-1/2 mb-10 lg:mb-0">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-[300px] min-h-screen py-20">
+          <div className="mb-10 lg:mb-0">
             <div className="flex items-start space-x-8">
               <div
                 ref={bigLetterRef}
-                className="text-9xl lg:text-[12rem] font-bold text-gray-900 leading-none"
+                className="text-6xl lg:text-[12rem] font-bold text-gray-900 leading-none"
               >
-                
+                {/* Big letter or initial */}
               </div>
-             
             </div>
           </div>
 
-          <div className="lg:w-1/2 lg:pl-16">
+          <div className="lg:pl-16">
             <div className="mb-6">
-              <p className="text-sm text-gray-500 mb-2">Creative Agency</p>
+              <p className="text-sm text-neutral-800 font-bold mb-2">
+                Creative Agency
+              </p>
               <h1
                 ref={titleRef}
-                className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
+                className="text-4xl lg:text-6xl font-bold text-neutral-800 mb-6 leading-tight"
               >
-                Rally Creative
-                <span className="block text-blue-600">Solutions</span>
+                Rally Creative Solutions
+               
               </h1>
               <p
                 ref={descriptionRef}
-                className="text-lg text-gray-600 mb-8 leading-relaxed"
+                className="text-lg text-neutral-800 mb-8 leading-relaxed mt-10"
               >
                 We create stunning digital experiences that drive results. From
                 brand identity to web development, we bring your vision to life
@@ -110,25 +110,16 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                 onClick={() => onNavigate("explore-work")}
                 className="group cursor-pointer inline-flex items-center space-x-3 text-blue-600 hover:text-blue-700 transition-colors duration-300"
               >
-                <span className="text-sm font-medium tracking-wide">
-                  EXPLORE OUR WORK
-                </span>
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                    <ArrowRight
-                      size={20}
-                      className="group-hover:translate-x-1 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="absolute inset-0 rounded-full border-2 border-current animate-ping opacity-20"></div>
-                </div>
+                {/* Icon or arrow button */}
               </div>
             </div>
 
             <div
               ref={buttonsRef}
               className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"
-            ></div>
+            >
+              {/* Buttons if needed */}
+            </div>
           </div>
         </div>
       </div>

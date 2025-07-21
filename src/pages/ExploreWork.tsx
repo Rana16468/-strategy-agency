@@ -95,7 +95,7 @@ const ExploreWork: React.FC<ExploreWorkProps> = ({ onBack }) => {
 
         {/* Projects Grid */}
         <div ref={projectsRef} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <div
               key={project.id}
               className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
