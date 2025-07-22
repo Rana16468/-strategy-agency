@@ -1,25 +1,25 @@
-import  { useState, useEffect } from 'react';
-import VerticalMenu from './components/VerticalMenu';
-import Hero from './components/Hero';
-import About from './components/About';
-import Portfolio from './components/Portfolio';
-import Career from './components/Career';
-import Contact from './components/Contact';
-import ExploreWork from './pages/ExploreWork';
-import LearnMore from './pages/LearnMore';
-import ViewProjects from './pages/ViewProjects';
-import JoinTeam from './pages/JoinTeam';
-import GetInTouch from './pages/GetInTouch';
+import { useState, useEffect } from "react";
+import VerticalMenu from "./components/VerticalMenu";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Portfolio from "./components/Portfolio";
+import Career from "./components/Career";
+import Contact from "./components/Contact";
+import ExploreWork from "./pages/ExploreWork";
+import LearnMore from "./pages/LearnMore";
+import ViewProjects from "./pages/ViewProjects";
+import JoinTeam from "./pages/JoinTeam";
+import GetInTouch from "./pages/GetInTouch";
 
 function App() {
-  const [activeSection, setActiveSection] = useState('home');
-  const [currentPage, setCurrentPage] = useState('home');
+  const [activeSection, setActiveSection] = useState("home");
+  const [currentPage, setCurrentPage] = useState("home");
 
   useEffect(() => {
-    if (currentPage !== 'home') return;
-    
+    if (currentPage !== "home") return;
+
     const handleScroll = () => {
-      const sections = ['home', 'about', 'portfolio', 'career', 'contact'];
+      const sections = ["home", "about", "portfolio", "career", "contact"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -36,16 +36,16 @@ function App() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
+        behavior: "smooth",
+        block: "start",
       });
     }
     setActiveSection(sectionId);
@@ -56,36 +56,36 @@ function App() {
   };
 
   const navigateToHome = () => {
-    setCurrentPage('home');
-    setActiveSection('home');
+    setCurrentPage("home");
+    setActiveSection("home");
   };
 
   // Render different pages
-  if (currentPage === 'explore-work') {
+  if (currentPage === "explore-work") {
     return <ExploreWork onBack={navigateToHome} />;
   }
-  
-  if (currentPage === 'learn-more') {
+
+  if (currentPage === "learn-more") {
     return <LearnMore onBack={navigateToHome} />;
   }
-  
-  if (currentPage === 'view-projects') {
+
+  if (currentPage === "view-projects") {
     return <ViewProjects onBack={navigateToHome} />;
   }
-  
-  if (currentPage === 'join-team') {
+
+  if (currentPage === "join-team") {
     return <JoinTeam onBack={navigateToHome} />;
   }
-  
-  if (currentPage === 'get-in-touch') {
+
+  if (currentPage === "get-in-touch") {
     return <GetInTouch onBack={navigateToHome} />;
   }
 
   return (
     <div className="max-w-7xl mx-auto bg-gray-50">
-      <VerticalMenu 
-        activeSection={activeSection} 
-        onSectionChange={scrollToSection} 
+      <VerticalMenu
+        activeSection={activeSection}
+        onSectionChange={scrollToSection}
       />
       <Hero onNavigate={navigateToPage} />
       <About onNavigate={navigateToPage} />
